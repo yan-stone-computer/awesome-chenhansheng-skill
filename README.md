@@ -22,6 +22,7 @@
 ![Source](https://img.shields.io/badge/Source-342万字-red.svg?style=for-the-badge)
 ![Dimensions](https://img.shields.io/badge/Dimensions-27-orange.svg?style=for-the-badge)
 ![AI](https://img.shields.io/badge/AI%20语气模仿-已启用-purple.svg?style=for-the-badge)
+![Compatible](https://img.shields.io/badge/支持-Claude%20Code%20%7C%20Cursor%20%7C%20OpenCode%20%7C%20Trae-blueviolet.svg?style=for-the-badge)
 
 <br/><br/>
 
@@ -249,25 +250,166 @@ AI 不只是分析，是用他的语气跟你说话
 
 ## 🚀 安装
 
-### 方式一：WorkBuddy 技能安装（推荐）
+### 📦 一键安装脚本（全平台）
 
 ```bash
-# 1. 克隆仓库
+# 克隆仓库
 git clone https://github.com/your-username/awesome-chen-hansheng.git
+cd awesome-chen-hansheng
 
-# 2. 复制技能文件
-mkdir -p ~/.workbuddy/skills/chen-hansheng-wisdom
-cp awesome-chen-hansheng/SKILL.md ~/.workbuddy/skills/chen-hansheng-wisdom/SKILL.md
-
-# 3. 重启 WorkBuddy，技能自动加载
+# 选择你要配置的智能体，运行对应脚本
+bash scripts/install.sh --workbuddy     # WorkBuddy
+bash scripts/install.sh --claude-code   # Claude Code
+bash scripts/install.sh --cursor        # Cursor
+bash scripts/install.sh --opencode      # OpenCode
+bash scripts/install.sh --trae          # Trae
+bash scripts/install.sh --all           # 全部安装
 ```
 
-安装后，在对话中提到这些关键词即可触发：
+### 🛠️ 支持全部主流 AI 智能体
+
+本仓库为 **6 种主流 AI 智能体**提供了开箱即用的配置，每个工具的配置文件都放在 `configs/` 目录下：
+
+| 智能体 | 配置文件格式 | 配置文件位置 | 生效范围 |
+|--------|------------|------------|---------|
+| **WorkBuddy** | `SKILL.md` | `~/.workbuddy/skills/chen-hansheng-wisdom/` | 所有项目 |
+| **Claude Code** | Agent Skills 标准 `SKILL.md` | `~/.claude/skills/chen-hansheng-wisdom/` | 所有项目 |
+| **Cursor** | `.mdc` 规则 | `.cursor/rules/chen-hansheng-wisdom.mdc` | 当前项目 |
+| **OpenCode** | `AGENTS.md` | 项目根目录 `AGENTS.md` | 当前项目 |
+| **Trae** | `.md` 规则 | `.trae/rules/chen-hansheng-wisdom.md` | 当前项目 |
+| **通用** | 纯 Markdown | 任意位置，手动加载 | 手动 |
+
+---
+
+### 🟦 方式一：WorkBuddy（推荐）
+
+> 本技能的原始平台，完整支持 27 个维度 + 语言风格模仿
+
+```bash
+mkdir -p ~/.workbuddy/skills/chen-hansheng-wisdom
+cp SKILL.md ~/.workbuddy/skills/chen-hansheng-wisdom/SKILL.md
+```
+
+重启 WorkBuddy 后，对话中提到这些关键词即可触发：
 > 为人处世 · 社交技巧 · 恋爱技巧 · 说话艺术 · 情商 · 饭局 · 敬酒 · 递烟 · 追女生 · 撩妹
 
-### 方式二：直接阅读
+---
 
-`SKILL.md` 本身就是一份完整的分析文档（635 行，48KB），用任何 Markdown 编辑器打开即可阅读，无需安装任何软件。
+### 🟠 方式二：Claude Code
+
+> 遵循 **Agent Skills 开放标准**，`SKILL.md` 格式与 Claude Code 原生兼容
+
+**个人级（所有项目生效）：**
+```bash
+mkdir -p ~/.claude/skills/chen-hansheng-wisdom
+cp configs/claude-code/.claude/skills/chen-hansheng-wisdom/SKILL.md ~/.claude/skills/chen-hansheng-wisdom/SKILL.md
+```
+
+**项目级（当前项目生效）：**
+```bash
+mkdir -p .claude/skills/chen-hansheng-wisdom
+cp configs/claude-code/.claude/skills/chen-hansheng-wisdom/SKILL.md .claude/skills/chen-hansheng-wisdom/SKILL.md
+```
+
+**使用方式：**
+- 自动触发：描述匹配时 Claude 自动加载
+- 手动调用：输入 `/chen-hansheng-wisdom` 直接触发
+
+---
+
+### 🟢 方式三：Cursor
+
+> 使用 Cursor Rules 机制（`.mdc` 格式，带 frontmatter）
+
+```bash
+mkdir -p .cursor/rules
+cp configs/cursor/.cursor/rules/chen-hansheng-wisdom.mdc .cursor/rules/
+```
+
+配置说明：
+- `alwaysApply: true` —— 所有对话自动生效
+- 如需按文件匹配，修改 `.mdc` 中的 `globs` 字段
+- 完整版（27维度）可在对话中要求 AI 读取仓库根目录的 `SKILL.md`
+
+---
+
+### 🟡 方式四：OpenCode
+
+> 使用 `AGENTS.md` 格式，OpenCode 原生支持
+
+**项目级：**
+```bash
+cp configs/opencode/AGENTS.md ./AGENTS.md
+```
+
+**全局级（所有项目生效）：**
+```bash
+mkdir -p ~/.config/opencode
+cp configs/opencode/AGENTS.md ~/.config/opencode/AGENTS.md
+```
+
+**进阶：加载完整版 SKILL.md**
+在 `opencode.json` 的 `instructions` 字段中添加：
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md", "path/to/SKILL.md"]
+}
+```
+
+> 💡 OpenCode 也兼容 Claude Code 的 `.claude/skills/` 目录（默认开启），如果你配了 Claude Code，OpenCode 也能直接用。
+
+---
+
+### 🔴 方式五：Trae
+
+> 使用 Trae Rules 机制（`.trae/rules/*.md`，带 frontmatter）
+
+```bash
+mkdir -p .trae/rules
+cp configs/trae/.trae/rules/chen-hansheng-wisdom.md .trae/rules/
+```
+
+**四种生效方式（修改 frontmatter 即可切换）：**
+
+| 生效方式 | frontmatter 设置 | 说明 |
+|---------|-----------------|------|
+| 始终生效 | `alwaysApply: true` | 所有对话自动加载（默认） |
+| 指定文件生效 | `globs: src/**/*.ts` | 匹配文件时生效 |
+| 智能生效 | `description: 适用场景描述` | AI 判断相关性后加载 |
+| 手动触发 | 无需配置 | 对话中输入 `#Rule` 引用 |
+
+> 💡 Trae 也支持 `AGENTS.md` 和 `CLAUDE.md`（需在 设置 > 规则 > 导入设置 中开启对应开关）。
+
+---
+
+### ⬜ 方式六：通用（任何 AI 工具）
+
+把 `SKILL.md` 的内容作为 system prompt 粘贴到任意 AI 工具中（ChatGPT、Kimi、豆包、文心一言等），或在对话开始时说：
+
+> "请阅读以下内容并完全遵守，之后用陈汉升的语气和我对话：[粘贴 SKILL.md 内容]"
+
+---
+
+### 📁 配置文件速查
+
+```
+configs/
+├── claude-code/
+│   └── .claude/skills/chen-hansheng-wisdom/
+│       └── SKILL.md              # Agent Skills 标准版（27维度完整版）
+├── cursor/
+│   └── .cursor/rules/
+│       └── chen-hansheng-wisdom.mdc   # Cursor 规则（核心原则浓缩版）
+├── opencode/
+│   ├── AGENTS.md                 # OpenCode 规则（核心原则浓缩版）
+│   └── opencode.json             # OpenCode 配置（加载完整 SKILL.md）
+└── trae/
+    └── .trae/rules/
+        └── chen-hansheng-wisdom.md    # Trae 规则（核心原则浓缩版）
+```
+
+> 📌 **说明**：Claude Code / WorkBuddy 使用**完整版**（27维度），因为它们的 Skill 机制是按需加载，不占上下文。Cursor / OpenCode / Trae 使用**浓缩版**（核心原则），因为规则常驻上下文，太长会占用 token。浓缩版末尾都注明了"完整版见仓库根目录 SKILL.md"。
 
 ---
 
@@ -277,9 +419,18 @@ cp awesome-chen-hansheng/SKILL.md ~/.workbuddy/skills/chen-hansheng-wisdom/SKILL
 awesome-chen-hansheng/
 │
 ├── SKILL.md                  # 技能主文件（635 行 · 48KB · 27 个维度）
-├── README.md                 # 本文档
+├── README.md                 # 本文档（含全智能体配置指南）
 ├── LICENSE                   # MIT
 ├── .gitignore
+│
+├── configs/                  # 🆕 全智能体配置文件
+│   ├── claude-code/          # Claude Code（Agent Skills 标准）
+│   ├── cursor/               # Cursor（.mdc 规则）
+│   ├── opencode/             # OpenCode（AGENTS.md）
+│   └── trae/                 # Trae（.trae/rules）
+│
+├── scripts/
+│   └── install.sh            # 一键安装脚本（支持 --workbuddy/--claude-code/--cursor/--opencode/--trae/--all）
 │
 ├── images/                   # AI 生成的主题插图
 │   ├── cover.png             # 封面 · 黄昏城市天际线
@@ -313,7 +464,7 @@ awesome-chen-hansheng/
 <details>
 <summary><b>🔥 不用 WorkBuddy 能用吗？</b></summary>
 
-可以。`SKILL.md` 本身就是一份完整的 Markdown 文档，直接阅读即可。如果你用其他 AI 工具，也可以把文件内容作为 system prompt 加载。
+当然可以！本仓库为 **6 种主流智能体**提供了开箱即用的配置：**Claude Code**（Agent Skills 标准）、**Cursor**（.mdc 规则）、**OpenCode**（AGENTS.md）、**Trae**（.trae/rules）、**WorkBuddy**（SKILL.md），以及**通用方式**（任何 AI 工具，直接粘贴 SKILL.md 作为 system prompt）。详见上方[安装](#-安装)章节。
 </details>
 
 <details>
