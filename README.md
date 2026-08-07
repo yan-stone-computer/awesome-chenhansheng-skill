@@ -4,7 +4,7 @@
 
 <br/>
 
-# awesome-chen-hansheng
+# awesome-chenhansheng-skill
 
 ## 🔥 把 342 万字小说，蒸馏成 27 条可执行的人生操作手册
 
