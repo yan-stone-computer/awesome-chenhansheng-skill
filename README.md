@@ -302,13 +302,13 @@ cp SKILL.md ~/.workbuddy/skills/chen-hansheng-wisdom/SKILL.md
 **个人级（所有项目生效）：**
 ```bash
 mkdir -p ~/.claude/skills/chen-hansheng-wisdom
-cp configs/claude-code/.claude/skills/chen-hansheng-wisdom/SKILL.md ~/.claude/skills/chen-hansheng-wisdom/SKILL.md
+cp configs/claude-code/SKILL.md ~/.claude/skills/chen-hansheng-wisdom/SKILL.md
 ```
 
 **项目级（当前项目生效）：**
 ```bash
 mkdir -p .claude/skills/chen-hansheng-wisdom
-cp configs/claude-code/.claude/skills/chen-hansheng-wisdom/SKILL.md .claude/skills/chen-hansheng-wisdom/SKILL.md
+cp configs/claude-code/SKILL.md .claude/skills/chen-hansheng-wisdom/SKILL.md
 ```
 
 **使用方式：**
@@ -323,7 +323,7 @@ cp configs/claude-code/.claude/skills/chen-hansheng-wisdom/SKILL.md .claude/skil
 
 ```bash
 mkdir -p .cursor/rules
-cp configs/cursor/.cursor/rules/chen-hansheng-wisdom.mdc .cursor/rules/
+cp configs/cursor/chen-hansheng-wisdom.mdc .cursor/rules/
 ```
 
 配置说明：
@@ -367,7 +367,7 @@ cp configs/opencode/AGENTS.md ~/.config/opencode/AGENTS.md
 
 ```bash
 mkdir -p .trae/rules
-cp configs/trae/.trae/rules/chen-hansheng-wisdom.md .trae/rules/
+cp configs/trae/chen-hansheng-wisdom.md .trae/rules/
 ```
 
 **四种生效方式（修改 frontmatter 即可切换）：**
@@ -396,20 +396,19 @@ cp configs/trae/.trae/rules/chen-hansheng-wisdom.md .trae/rules/
 ```
 configs/
 ├── claude-code/
-│   └── .claude/skills/chen-hansheng-wisdom/
-│       └── SKILL.md              # Agent Skills 标准版（27维度完整版）
+│   └── SKILL.md              # Claude Code 版（Agent Skills 标准 · 27维度完整版）
 ├── cursor/
-│   └── .cursor/rules/
-│       └── chen-hansheng-wisdom.mdc   # Cursor 规则（核心原则浓缩版）
+│   └── chen-hansheng-wisdom.mdc   # Cursor 版（核心原则浓缩版）
 ├── opencode/
-│   ├── AGENTS.md                 # OpenCode 规则（核心原则浓缩版）
-│   └── opencode.json             # OpenCode 配置（加载完整 SKILL.md）
+│   ├── AGENTS.md             # OpenCode 版（核心原则浓缩版）
+│   └── opencode.json         # OpenCode 配置（加载完整 SKILL.md）
 └── trae/
-    └── .trae/rules/
-        └── chen-hansheng-wisdom.md    # Trae 规则（核心原则浓缩版）
+    └── chen-hansheng-wisdom.md    # Trae 版（核心原则浓缩版）
 ```
 
-> 📌 **说明**：Claude Code / WorkBuddy 使用**完整版**（27维度），因为它们的 Skill 机制是按需加载，不占上下文。Cursor / OpenCode / Trae 使用**浓缩版**（核心原则），因为规则常驻上下文，太长会占用 token。浓缩版末尾都注明了"完整版见仓库根目录 SKILL.md"。
+> 📌 **安装提示**：`configs/` 里的文件名已经是"复制到哪就放哪"的布局——比如 `configs/cursor/chen-hansheng-wisdom.mdc` 复制到项目的 `.cursor/rules/` 目录即可，`configs/trae/chen-hansheng-wisdom.md` 复制到项目的 `.trae/rules/` 目录即可。仓库内不包含点开头目录，GitHub 网页上传可正常识别。
+
+> 📌 **版本说明**：Claude Code / WorkBuddy 使用**完整版**（27维度），因为它们的 Skill 机制是按需加载，不占上下文。Cursor / OpenCode / Trae 使用**浓缩版**（核心原则），因为规则常驻上下文，太长会占用 token。浓缩版末尾都注明了"完整版见仓库根目录 SKILL.md"。
 
 ---
 
@@ -427,7 +426,7 @@ awesome-chen-hansheng/
 │   ├── claude-code/          # Claude Code（Agent Skills 标准）
 │   ├── cursor/               # Cursor（.mdc 规则）
 │   ├── opencode/             # OpenCode（AGENTS.md）
-│   └── trae/                 # Trae（.trae/rules）
+│   └── trae/                 # Trae（.md 规则）
 │
 ├── scripts/
 │   └── install.sh            # 一键安装脚本（支持 --workbuddy/--claude-code/--cursor/--opencode/--trae/--all）

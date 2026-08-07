@@ -45,7 +45,7 @@ install_workbuddy() {
 install_claude_code() {
     local target="$HOME/.claude/skills/chen-hansheng-wisdom"
     mkdir -p "$target"
-    cp "${REPO_ROOT}/configs/claude-code/.claude/skills/chen-hansheng-wisdom/SKILL.md" "${target}/SKILL.md"
+    cp "${REPO_ROOT}/configs/claude-code/SKILL.md" "${target}/SKILL.md"
     log "Claude Code 安装完成 → ~/.claude/skills/chen-hansheng-wisdom/"
     info "使用方式: 输入 /chen-hansheng-wisdom 或让 Claude 自动触发"
 }
@@ -56,7 +56,7 @@ install_claude_code() {
 install_cursor() {
     local target=".cursor/rules"
     mkdir -p "$target"
-    cp "${REPO_ROOT}/configs/cursor/.cursor/rules/chen-hansheng-wisdom.mdc" "${target}/"
+    cp "${REPO_ROOT}/configs/cursor/chen-hansheng-wisdom.mdc" "${target}/"
     log "Cursor 规则已安装 → ./.cursor/rules/chen-hansheng-wisdom.mdc"
     warn "请在 Cursor 中打开规则面板确认已启用 (Rules > Enable)"
 }
@@ -80,7 +80,7 @@ install_opencode() {
 install_trae() {
     local target=".trae/rules"
     mkdir -p "$target"
-    cp "${REPO_ROOT}/configs/trae/.trae/rules/chen-hansheng-wisdom.md" "${target}/"
+    cp "${REPO_ROOT}/configs/trae/chen-hansheng-wisdom.md" "${target}/"
     log "Trae 规则已安装 → ./.trae/rules/chen-hansheng-wisdom.md"
     warn "请在 Trae 设置 > 规则 中确认该规则已启用"
 }
