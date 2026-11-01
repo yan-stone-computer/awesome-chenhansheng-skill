@@ -1,3 +1,5 @@
+
+
 <div align="center">
 
 <img src="images/cover.png" alt="cover" width="820"/>
@@ -254,8 +256,8 @@ AI 不只是分析，是用他的语气跟你说话
 
 ```bash
 # 克隆仓库
-git clone https://github.com/your-username/awesome-chen-hansheng.git
-cd awesome-chen-hansheng
+git clone https://github.com/yan-stone-computer/awesome-chenhansheng-skill.git
+cd awesome-chenhansheng-skill
 
 # 选择你要配置的智能体，运行对应脚本
 bash scripts/install.sh --workbuddy     # WorkBuddy
