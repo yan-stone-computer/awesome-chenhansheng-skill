@@ -35,6 +35,7 @@ install_workbuddy() {
     local target="$HOME/.workbuddy/skills/chen-hansheng-wisdom"
     mkdir -p "$target"
     cp "${REPO_ROOT}/SKILL.md" "${target}/SKILL.md"
+    cp -R "${REPO_ROOT}/references" "${target}/"
     log "WorkBuddy 安装完成 → ~/.workbuddy/skills/chen-hansheng-wisdom/"
     warn "请重启 WorkBuddy 使技能生效"
 }
@@ -46,6 +47,7 @@ install_claude_code() {
     local target="$HOME/.claude/skills/chen-hansheng-wisdom"
     mkdir -p "$target"
     cp "${REPO_ROOT}/configs/claude-code/SKILL.md" "${target}/SKILL.md"
+    cp -R "${REPO_ROOT}/references" "${target}/"
     log "Claude Code 安装完成 → ~/.claude/skills/chen-hansheng-wisdom/"
     info "使用方式: 输入 /chen-hansheng-wisdom 或让 Claude 自动触发"
 }
