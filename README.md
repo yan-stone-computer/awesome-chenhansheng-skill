@@ -99,9 +99,9 @@ AI 不只是分析，是用他的语气跟你说话
 
 ---
 
-## 🗣️ 声线契约：先把话说得像，再谈说得对
+## 🗣️ 文字语气契约：先把话说得像，再谈说得对
 
-以前这 27 条更像“陈汉升会怎么做”的分析资料。现在 `SKILL.md` 最前面新增了**角色声线契约**，优先级高于所有策略：
+以前这 27 条更像“陈汉升会怎么做”的分析资料。现在 `SKILL.md` 最前面新增了**角色文字语气契约**，优先级高于所有策略：
 
 - 先判断对象和场面，再开口；先给一句短判断，再补一个关键理由。
 - 一句只说一个意思。用户问“怎么说”，先给能直接说出口的话。
@@ -111,7 +111,7 @@ AI 不只是分析，是用他的语气跟你说话
 - **默认只输出对话**。用户没点名要分析或报告时，就先像真人开口，简单问题一两句，情绪问题三到五句。
 - 对方真难受时立刻收笑话；涉及伤害、违法或明显不对等关系时，不为了像角色而给危险建议。
 
-更细的说话机制在 [`references/voice-atlas.md`](references/voice-atlas.md)：短句骨架、口头词触发条件、七类说话动作、对象语气切换和“人机味”黑名单。另有 [`references/voice-examples.md`](references/voice-examples.md) 的 12 组合成语气标定样例，覆盖职场抢功、临时加活、借钱、劝酒、甩锅、被夸、消息变慢、求助、拒绝、冷战、催婚和探工资。它们不是原文摘抄，专门用来校准“怎么起句、哪里停、什么时候少解释”。
+更细的说话机制在 [`references/text-tone-atlas.md`](references/text-tone-atlas.md)：短句骨架、口头词触发条件、七类说话动作、对象语气切换和“人机味”黑名单。另有 [`references/text-tone-examples.md`](references/text-tone-examples.md) 的 12 组合成文字语气标定样例，覆盖职场抢功、临时加活、借钱、劝酒、甩锅、被夸、消息变慢、求助、拒绝、冷战、催婚和探工资。它们不是原文摘抄，专门用来校准“怎么起句、哪里停、什么时候少解释”。
 
 有工具权限时，发送前可用 `python scripts/check_reply_style.py draft.txt` 扫描报告腔、标题清单、AI 自指、连续口头禅和超长句。退出码为 `0` 才表示通过。
 
@@ -344,7 +344,7 @@ bash scripts/install.sh --all           # 全部安装
 
 ### 🟦 方式一：WorkBuddy（推荐）
 
-> 本技能的原始平台，完整支持 45 个维度 + 角色声线契约
+> 本技能的原始平台，完整支持 45 个维度 + 角色文字语气契约
 
 ```bash
 mkdir -p ~/.workbuddy/skills/chen-hansheng-wisdom
@@ -469,7 +469,7 @@ configs/
 
 > 📌 **安装提示**：`configs/` 里的文件名已经是"复制到哪就放哪"的布局——比如 `configs/cursor/chen-hansheng-wisdom.mdc` 复制到项目的 `.cursor/rules/` 目录即可，`configs/trae/chen-hansheng-wisdom.md` 复制到项目的 `.trae/rules/` 目录即可。仓库内不包含点开头目录，GitHub 网页上传可正常识别。
 
-> 📌 **版本说明**：Claude Code / WorkBuddy 使用**完整版**（45 维度 + 声线契约），因为它们的 Skill 机制是按需加载，不占上下文。Cursor / OpenCode / Trae 使用**浓缩版**（声线硬约束 + 核心原则 + 28–45 速查），因为规则常驻上下文，太长会占用 token。
+> 📌 **版本说明**：Claude Code / WorkBuddy 使用**完整版**（45 维度 + 文字语气契约），因为它们的 Skill 机制是按需加载，不占上下文。Cursor / OpenCode / Trae 使用**浓缩版**（文字语气硬约束 + 核心原则 + 28–45 速查），因为规则常驻上下文，太长会占用 token。
 
 ---
 
@@ -493,11 +493,11 @@ awesome-chen-hansheng/
 ├── scripts/
 │   ├── install.sh            # 一键安装脚本
 │   ├── check_reply_style.py  # 发送前扫描 AI 报告腔与格式味
-│   └── test_voice_contract.py # 声线与配置同步检查
+│   └── test_text_tone_contract.py # 文字语气与配置同步检查
 │
 ├── references/
-│   ├── voice-atlas.md        # 句法、用词、语气切换与 AI 腔避雷
-│   └── voice-examples.md     # 12 组跨场景合成语气标定样例
+│   ├── text-tone-atlas.md    # 句法、用词、语气切换与 AI 腔避雷
+│   └── text-tone-examples.md # 12 组跨场景合成文字语气标定样例
 │
 ├── images/                   # AI 生成的主题插图
 │   ├── cover.png             # 封面 · 黄昏城市天际线
@@ -506,7 +506,7 @@ awesome-chen-hansheng/
 │   └── language-style.png    # 语言风格 · 茶室倾听与语气
 │
 └── 内容架构（5 大章节 · 45 个维度）
-    ├── 零、角色声线契约 ──────────── 4 小节
+    ├── 零、角色文字语气契约 ──────── 4 小节
     ├── 一、为人处世篇 ──────────── 10 维度
     ├── 二、恋爱技巧篇 ──────────── 10 维度
     ├── 三、语言风格与语气模仿指南 ── 7 子节
@@ -558,7 +558,7 @@ awesome-chen-hansheng/
 | 技能文件大小 | 59 KB |
 | 维度总数 | 45 个 |
 | 场景拆解 / 跨场景技巧 | 27 / 18 |
-| 声线契约 | 4 小节 |
+| 文字语气契约 | 4 小节 |
 | AI 生成插图 | 4 张 |
 | 搜索方式 | 6 个并行 Agent + Grep 精搜 |
 

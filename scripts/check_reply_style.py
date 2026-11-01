@@ -13,16 +13,16 @@ REPORT_PATTERNS = [
     (r"首先[，,]?", "report transition: 首先"),
     (r"其次[，,]?", "report transition: 其次"),
     (r"最后[，,]?$", "report transition: 最后"),
-    (r"综上所述|综上[，,]?", "summary voice"),
+    (r"综上所述|综上[，,]?", "summary tone"),
     (r"值得注意的是", "academic filler"),
     (r"从[^。\n]{0,16}角度来看", "framing filler"),
     (r"希望(?:这些建议|对你)有?帮助", "assistant sign-off"),
     (r"可以理解你的感受", "therapy-template phrasing"),
     (r"这是一个复杂的问题", "generic opener"),
     (r"需要综合判断", "generic disclaimer"),
-    (r"本质上|核心在于", "lecture voice"),
+    (r"本质上|核心在于", "lecture tone"),
     (r"以下是|接下来(?:我们|我)?", "assistant setup"),
-    (r"作为一个?(?:AI|人工智能|语言模型|助手)", "self-referential AI voice"),
+    (r"作为一个?(?:AI|人工智能|语言模型|助手)", "AI self-reference"),
     (r"我可以帮你|我建议你", "assistant framing"),
 ]
 
@@ -62,7 +62,7 @@ def audit_reply(text: str, structured: bool = False) -> list[str]:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Check a draft for AI-report voice before sending it."
+        description="Check a draft for AI-report tone before sending it."
     )
     parser.add_argument("file", nargs="?", help="UTF-8 text file; omit to read stdin")
     parser.add_argument("--text", help="Check this text directly")
