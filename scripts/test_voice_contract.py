@@ -1,4 +1,6 @@
 import unittest
+import importlib.util
+import re
 from pathlib import Path
 
 
@@ -45,6 +47,41 @@ class VoiceContractTests(unittest.TestCase):
         self.assertIn("语气标定样例", examples)
         self.assertGreaterEqual(examples.count("**用户：**"), 8)
         self.assertIn("references/voice-examples.md", skill)
+
+    def test_style_checker_rejects_report_voice(self):
+        spec = importlib.util.spec_from_file_location(
+            "check_reply_style", ROOT / "scripts" / "check_reply_style.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+
+        natural = "先别急。你先把时间点发过去，问他明早几点要。别的等他回。"
+        report = (
+            "首先，这是一个复杂的问题。其次，需要注意的是沟通边界。"
+            "最后，希望对你有帮助。"
+        )
+        self.assertEqual(module.audit_reply(natural), [])
+        self.assertGreaterEqual(len(module.audit_reply(report)), 3)
+
+    def test_default_skill_mode_forbids_markdown_reports(self):
+        skill = (ROOT / "SKILL.md").read_text("utf-8")
+        self.assertIn("默认只输出对话", skill)
+        self.assertIn("check_reply_style.py", skill)
+
+    def test_every_voice_example_passes_the_style_checker(self):
+        spec = importlib.util.spec_from_file_location(
+            "check_reply_style", ROOT / "scripts" / "check_reply_style.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        examples = (ROOT / "references" / "voice-examples.md").read_text("utf-8")
+        replies = re.findall(r"\*\*回复：\*\*\s*(.*?)(?=\n---|\Z)", examples, re.S)
+        self.assertEqual(len(replies), 12)
+        for index, reply in enumerate(replies, start=1):
+            with self.subTest(example=index):
+                self.assertEqual(module.audit_reply(reply), [])
 
 
 if __name__ == "__main__":
