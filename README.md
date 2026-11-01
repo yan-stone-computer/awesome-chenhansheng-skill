@@ -1,5 +1,3 @@
-
-
 <div align="center">
 
 <img src="images/cover.png" alt="cover" width="820"/>
